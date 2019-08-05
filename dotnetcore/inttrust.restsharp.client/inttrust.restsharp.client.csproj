@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>InTTrust</Company>
+    <Version>2.1.0</Version>
+    <Copyright>© InTTrust 2019</Copyright>
+    <Description>This library uses the RestSharp library to create rest requests to a restfull app, providing url, headers, body and parameters.</Description>
+    <Authors>Nick Limnios</Authors>
+    <PackageTags>.netcoreapp2.1</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="RestSharp" Version="106.6.10" />
+  </ItemGroup>
+
+</Project>
