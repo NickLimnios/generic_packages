@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>2.2.0</Version>
+    <Authors>Nick Limnios</Authors>
+    <Company>InTTrust SA</Company>
+    <Description>This library exposes a generic service inrerface for CRUD actions on a dbcontext using inttrust.core.repository. The service methods can be overriden to add custom logic.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>© InTTrust 2019</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="inttrust.core.repository" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>
