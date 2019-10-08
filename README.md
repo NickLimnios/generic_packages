@@ -163,8 +163,53 @@ Now MyEntityController provides the following routes :
 | HttpGet   | api/MyEntity/Get               |                 |Get all entities of type MyEntity       |
 
  
+# HttpRequestClient Static Class
+***Namespace:*** *inttrust.restsharp.client*
 
+***Dependencies:*** *RestSharp, Newtonsoft.Json*
 
+This library provides the methods to make rest calls to an api, using optional headers and parameters. It uses RestSharp to create a RestSharp.RestClient, send the RestSharp.RestRequest and return a RestSharp.IRestResponse . It also provides a generic extension to the RestSharp.IRestResponse to get a property value by its name, from the response.
 
+#### Example : 
 
-
+```C#
+  using inttrust.restsharp.client;
+  using RestSharp;
+  using Newtonsoft.Json;
+  
+  public void MyMethod()
+  { 
+    // create a dictionary with the request headers
+    Dictionary<string, string>() requestHeaders = new Dictionary<string, string>();
+    requestHeaders.Add("HeaderKey1", "HeaderValue1");
+    requestHeaders.Add("HeaderKey2", "HeaderValue2");
+  
+    // ExecuteRestGet
+    
+    // Make a Get request to an api. For example lets assume that the following route returns a collection of entities of type MyEntity.
+    string apiGetEntityRoute = "myserver/api/MyEntity/Get"
+    IRestResponse restResponse = HttpRequestClient.ExecuteRestGet(apiGetEntityRoute, requestHeaders);
+    IEnumerable<MyEntity> myEntities = JsonConvert.DeserializeObject<IEnumerable<MyEntity>>(restResponse.Content); // Convert the response to a collection of MyEntity entities
+    
+    // Make a Get request to an api. For example lets assume that the following route returns a single entities of type MyEntity.
+     string apiGetEntityRoute = "myserver/api/MyEntity/GetById?Id=1"
+     restResponse = HttpRequestClient.ExecuteRestGet(apiGetEntityRoute, requestHeaders);
+     string myProperty = restResponse.GetValue<string>("myPropertyName"); // get a property by name from the restResponse content
+     
+    // ExecuteRestPost
+    // Make a POST request to an api. For example lets assume that the following route creates an entity of type MyEntity.
+    MyEntity myEntity = new MyEntity();
+    string apiPostEntityRoute = "myserver/api/MyEntity/Create"
+    restResponse = HttpRequestClient.ExecuteRestPost(apiPostEntityRoute, JsonConvert.SerializeObject(myEntity), requestHeaders);
+    
+    // ExecuteRestPut
+    // Make a PUT request to an api. For example lets assume that the following route updates an entity of type MyEntity.
+    string apiPutEntityRoute = "myserver/api/MyEntity/Update"
+    restResponse = HttpRequestClient.ExecuteRestPut(apiPutEntityRoute, JsonConvert.SerializeObject(myEntity), requestHeaders);
+    
+    //ExecuteRestDelete
+    // Make a DELETE request to an api. For example lets assume that the following route deletes an entity of type MyEntity.
+    string apiDeleteEntityRoute = "myserver/api/MyEntity/Delete"
+    restResponse = HttpRequestClient.ExecuteRestDelete(apiDeleteEntityRoute, JsonConvert.SerializeObject(myEntity));
+  }
+```
